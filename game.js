@@ -16,6 +16,7 @@ class Game {
     _.each(this.players, (player) => {
       this.libraries[player.id] = [];
     });
+
     this.deck = this.configuration.shuffleStrategy(this.configuration.deckFactory());
   }
 
@@ -40,28 +41,39 @@ class Game {
     return this.moves[playerId].power;
   }
 
-  finishHand() {
-    const winningPlayerForIndex = (index) => {
-      const winners = Object.keys(this.moves)
-        .filter(playerId => this.moves[playerId].indexes.includes(index))
-        .reduce((winningPlayers, nextContender) => {
-          if (winningPlayers === null) return [nextContender];
-          if (this.powerOf(nextContender) < this.powerOf(winningPlayers[0])) return [nextContender];
-          if (this.powerOf(nextContender) === this.powerOf(winningPlayers[0])) return winningPlayers.concat(nextContender);
-          return winningPlayers;
-        }, null);
-      return (winners || []).length === 1 ? winners[0] : null;
-    };
-
-    const winnersByIndex = _.map([0, 1, 2, 3, 4], winningPlayerForIndex);
+  nextRound() {
+    const winnersByIndex = _.map([0, 1, 2, 3, 4], this._winningPlayerForIndex.bind(this));
     winnersByIndex.forEach((winnerId) => {
       let card = this.deck[0];
       this.deck = this.deck.slice(1);
-      if (winnerId) this.libraries[winnerId].push(card);
+      if (winnerId) {
+        this.libraries[winnerId].push(card);
+      }
     });
 
     this.clearMoves();
   }
+
+  _winningPlayerForIndex(index) {
+    const winners = Object.keys(this.moves)
+      .filter(playerId => this.moves[playerId].indexes.includes(index))
+      .reduce((winningPlayers, nextContender) => {
+        if (winningPlayers.length === 0) {
+          return [nextContender];
+        }
+
+        if (this.powerOf(nextContender) < this.powerOf(winningPlayers[0])) {
+          return [nextContender];
+        }
+
+        if (this.powerOf(nextContender) === this.powerOf(winningPlayers[0])) {
+          return winningPlayers.concat(nextContender);
+        }
+
+        return winningPlayers;
+      }, []);
+    return winners.length === 1 ? winners[0] : null;
+  };
 
   winners() {
     const playerHands = _.mapValues(this.libraries, Hand.solve);
