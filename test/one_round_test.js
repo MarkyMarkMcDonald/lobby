@@ -29,7 +29,7 @@ describe('Integration Tests', function () {
 
     let players = [bart, homer, lisa];
 
-    let game = new Game(players, {timeout: 5000, deckFactory: deckFactory, shuffleStrategy: _.identity});
+    let game = new Game(players, {deckFactory: deckFactory, shuffleStrategy: _.identity});
     game.start();
 
     expect(game.libraryFor(bart)).to.be.empty;

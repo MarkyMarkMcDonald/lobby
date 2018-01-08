@@ -4,7 +4,6 @@ const defaultDeckFactory = require('./deck_factory');
 
 class Game {
   constructor(players, configuration = {
-    timeout: undefined,
     shuffleStrategy: _.shuffle,
     deckFactory: defaultDeckFactory
   }) {
