@@ -67,7 +67,7 @@ class Game {
   winners() {
     const playerHands = _.mapValues(this.libraries, Hand.solve);
     const winningHands = Hand.winners(_.values(playerHands));
-    const winningPlayerHands = _.pickBy(playerHands, (hand, playerId) => {
+    const winningPlayerHands = _.pickBy(playerHands, (hand) => {
       return winningHands.indexOf(hand) !== -1;
     });
     return Object.keys(winningPlayerHands);
