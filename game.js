@@ -41,7 +41,7 @@ class Game {
     return this.moves[playerId].power;
   }
 
-  nextRound() {
+  nextHand() {
     const winnersByIndex = _.map([0, 1, 2, 3, 4], this._winningPlayerForIndex.bind(this));
     winnersByIndex.forEach((winnerId) => {
       let card = this.deck[0];

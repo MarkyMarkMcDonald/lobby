@@ -48,13 +48,13 @@ describe('Integration Tests', function () {
     game.setMove(homer, [0, 1, 2, 3]);
     game.setMove(lisa, [0, 3]);
 
-    game.nextRound();
+    game.nextHand();
 
     expect(game.libraryFor(homer)).to.deep.equal(['Jd', '3h']);
     expect(game.libraryFor(bart)).to.deep.equal(['2h']);
     expect(game.libraryFor(lisa)).to.deep.equal(['4h']);
 
-    game.nextRound();
+    game.nextHand();
 
     expect(game.libraryFor(homer)).to.deep.equal(['Jd', '3h']);
     expect(game.libraryFor(bart)).to.deep.equal(['2h']);
