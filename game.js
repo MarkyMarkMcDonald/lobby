@@ -28,6 +28,10 @@ class Game {
     return this.libraries[player.id];
   }
 
+  isFinished() {
+    return this.deck.length === 0;
+  }
+
   clearMoves() {
     this.moves = {};
   }

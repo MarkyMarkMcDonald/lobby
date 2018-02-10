@@ -54,11 +54,15 @@ describe('Integration Tests', function () {
     expect(game.libraryFor(bart)).to.deep.equal(['2h']);
     expect(game.libraryFor(lisa)).to.deep.equal(['4h']);
 
+    expect(game.isFinished()).to.be.false;
+
     game.nextHand();
 
     expect(game.libraryFor(homer)).to.deep.equal(['Jd', '3h']);
     expect(game.libraryFor(bart)).to.deep.equal(['2h']);
     expect(game.libraryFor(lisa)).to.deep.equal(['4h']);
+
+    expect(game.isFinished()).to.be.true;
 
     expect(game.winners()).to.deep.equal(['Homer'])
   });
