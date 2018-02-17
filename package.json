@@ -16,7 +16,11 @@
     "mocha": "^4.1.0"
   },
   "dependencies": {
+    "ejs": "^2.5.7",
+    "hapi": "^17.2.0",
     "lodash": "^4.17.4",
-    "pokersolver": "^2.1.2"
+    "pokersolver": "^2.1.2",
+    "uuid": "^3.2.1",
+    "vision": "^5.3.1"
   }
 }

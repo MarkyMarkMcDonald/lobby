@@ -1,0 +1,19 @@
+<html>
+<body>
+<div>
+    <h1>Game Lobby</h1>
+    Game Id: <%= lobby.id %>
+    <h2>Players</h2>
+    <div>
+        <ul>
+            <= lobby.players.forEach((player) => { %>
+                <li><%= player %></li>
+            <% } %>
+        </ul>
+    </div>
+    <div>
+        <button>Start Game</button>
+    </div>
+</div>
+</body>
+</html>
